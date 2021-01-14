@@ -19,19 +19,19 @@
             function computerPlay() { //Function randomly returns rock, paper or scissors
                 let computerOptions = ["Rock", "Paper", "Scissors"];
 
-                let computerChosen = computerOptions[Math.floor(Math.random()*computerOptions.length)] 
+                let computerChosen = computerOptions[Math.floor(Math.random()*computerOptions.length)] //randomly picks an element from the array
                 return computerChosen;
 
             }
             
             
             
-            function playRound(computerSelection, playerSelection) {
-                playerSelection = playerSelection.toLowerCase();
+            function playRound(computerSelection, playerSelection) { //This function checks whether the player or computer had the winning move
+                playerSelection = playerSelection.toLowerCase(); //changes player's input to lowercase, so it doesn't matter whether or not the player entered a lower or higher case word
                 console.log(`You chose ${playerSelection}.`)
                 console.log(`The computer chose ${computerSelection}.`);
                 
-                if(computerSelection == "rock" && playerSelection == "paper") {
+                if(computerSelection == "rock" && playerSelection == "paper") { 
                     return "You win! Paper beats Rock."
                 }
                 else if(computerSelection == "paper" && playerSelection == "rock" ) {
@@ -60,24 +60,38 @@
             const computerSelection = '';
             const playerSelection = '';
             let playerScore = 0;
-            
+            let computerScore = 0;
             function game() {
-                for(i = 0; i < 5; i++) {
+                for(let i = 0; i < 5; i++) { //simple for loop which loops 5 times;
+                    
                     const playerSelection = prompt("Rock, Paper or Scissors?");
                     const computerSelection = computerPlay().toLowerCase();
                     let whoWon = playRound(computerSelection, playerSelection);
                     whoWon = whoWon.toString();
                     console.log(whoWon)
-                    if(whoWon.includes("win") == true) {
+                    if(whoWon.includes("win") == true) { //checks to see if player won the round, if it did, the player's score is increased, if not then the computer's score is increased
                         playerScore++;
-                        console.log(playerScore);
+                        console.log(`Player score = ${playerScore}`);
                     }
-                    else {
-                        console.log(" ")
+                    else if(whoWon.includes("lose")){
+                        computerScore++
+                        console.log(`Computer Score = ${computerScore}`)
+                    }
+                    else {}
+                    console.log(" ")
+                    if(i == 4) { //Checks if the game's over, then checks if the player or the computer score is highest
+                        if(playerScore > computerScore ){
+                            console.log("Congratulations, you've won the match!");
+                        }
+                        else if(playerScore == computerScore) {
+                            console.log("It's a TIE!")
+
+                        }
+                        else {
+                            console.log("Sadly, you've lost the match.")
+                        }
                     }
                     
-                
-
                 }
             }
             game();
